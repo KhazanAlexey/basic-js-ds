@@ -72,30 +72,30 @@ class BinarySearchTree {
             if (!node) {
                 return null
             }
-            if(value<node.value){
-                node.left=removeNode(node.left,value)
+            if (value < node.data) {
+                node.left = removeNode(node.left, value)
                 return node
-            }else if(node.value<value){
-                node.right=removeNode(node.right,value)
+            } else if (node.data < value) {
+                node.right = removeNode(node.right, value)
                 return node
             } else {
-                if(!node.left&&!node.right){
+                if (!node.left && !node.right) {
                     return null
                 }
-                if(!node.left){
-                    node=node.right
+                if (!node.left) {
+                    node = node.right
                     return node
                 }
-                if(!node.right){
-                    node=node.left
+                if (!node.right) {
+                    node = node.left
                     return node
                 }
-                let minFromRight=node.right;
-                while (minFromRight.left){
-                    minFromRight=minFromRight.left
+                let minFromRight = node.right;
+                while (minFromRight.left) {
+                    minFromRight = minFromRight.left
                 }
-                node.value=minFromRight.value
-                node.right=removeNode(node.right,minFromRight.value);
+                node.data = minFromRight.data
+                node.right = removeNode(node.right, minFromRight.data);
                 return node;
             }
         }
@@ -103,6 +103,7 @@ class BinarySearchTree {
 
     min() {
         let min;
+        if(!this.tree) return
         if (this.tree.left === null)
             return this.tree;
         else {
@@ -117,6 +118,7 @@ class BinarySearchTree {
 
     max() {
         let max;
+        if(!this.tree) return
         if (this.tree.right === null)
             return this.tree;
         else {
