@@ -7,22 +7,21 @@ const { Node } = require('../extensions/list-tree.js');
 * using Node from extensions
 */
 class BinarySearchTree {
-  constructor()
-  {
-    this.root = null;
+  constructor() {
+    this.tree = null;
   }
 
-  root() {
-   return this.root
+  root(){
+   return this.tree
   }
 
   add( data ) {
     var newNode = new Node(data);
-    if(this.root === null){
-      this.root = newNode;
+    if(this.tree === null){
+      this.tree = newNode;
       return this;
     }
-    let current = this.root;
+    let current = this.tree;
     while(current){
       if(data === current.data) return undefined;
       if(data < current.data){
@@ -46,9 +45,9 @@ class BinarySearchTree {
   }
 
   find(data) {
-    if(!this.root) return false
+    if(!this.tree) return null;
 
-    let current = this.root
+    let current = this.tree
     let found = false
     while(current && !found){
       if(data < current.data){
@@ -56,29 +55,46 @@ class BinarySearchTree {
       } else if(data > current.data){
         current = current.right
       } else {
-        found = current
+          found = current
       }
 
     }
 
-    if(!found) return undefined;
+    if(!found) return null;
     return found
 
   }
 
   remove( data ) {
+  let removeElem=this.find(data)
 
   }
 
   min() {
+    let min;
+    if(this.tree.left === null)
+      return this.tree;
+    else{
+      min=this.tree
+      while (min.left){
+        min=min.left
+      }
+    return min.data
+    }
 
   }
 
   max() {
-    if(this.root.right === null)
-      return this.root;
-    else
-      return this.min(this.root.right);
+    let max;
+    if (this.tree.right === null)
+      return this.tree;
+    else {
+      max = this.tree
+      while (max.right) {
+        max = max.right
+      }
+      return max.data
+    }
   }
 }
 
